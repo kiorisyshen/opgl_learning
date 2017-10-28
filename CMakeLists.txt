@@ -33,6 +33,8 @@ set(ALL_LIBS
 # GL_learn 1
 add_executable(01_first_window
 	src/01_first_window/01_first_window.cpp
+	common/glfwWindow.cpp
+	common/glfwWindow.hpp
 )
 target_link_libraries(01_first_window
 	${ALL_LIBS}
@@ -40,7 +42,7 @@ target_link_libraries(01_first_window
 # Xcode working directories
 set_target_properties(01_first_window PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/01_first_window/")
 
-# SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
+SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
 # SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
 
 if (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )
