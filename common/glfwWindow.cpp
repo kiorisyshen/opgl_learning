@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-bool glfwWindow::Init(int WWidth, int WHeight, const char* WTittle){
+bool glfwWindow::Init(const char* WTittle, int WWidth, int WHeight){
     if( !glfwInit() )
     {
         fprintf( stderr, "Failed to initialize GLFW.\n Type anykey to exit...\n" );
@@ -33,10 +33,24 @@ bool glfwWindow::Init(int WWidth, int WHeight, const char* WTittle){
 }
 
 void glfwWindow::Frame(void (*userDisplay)()){
+    double lastTime = 0.0;
+    int numFrames = 0;
+    if(useFPS){
+        lastTime = glfwGetTime();
+    }
     do{
         userDisplay();
         glfwSwapBuffers(window);
         glfwPollEvents();
+        if(useFPS){
+            numFrames ++;
+            double currTime = glfwGetTime();
+            if (currTime-lastTime >= 1.0){
+                printf("%f ms/frame\n", (currTime-lastTime)*1000/double(numFrames));
+                numFrames = 0;
+                lastTime = currTime;
+            }
+        }
     }while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
            !glfwWindowShouldClose(window) );
 }

@@ -5,11 +5,16 @@
 #include <GLFW/glfw3.h>
 
 class glfwWindow{
-public:
+private:
     GLFWwindow* window = NULL;
-    bool Init(int WWidth=1024, int WHeight=768, const char* WTittle="opgl_learning");
+    bool useFPS = false;
+    
+public:
+    bool Init(const char* WTittle="opgl_learning", int WWidth=1024, int WHeight=768);
     void Frame(void (*userDisplay)());
     void Terminate();
+    
+    void computeFPS(bool yorn){useFPS = yorn;};
 };
 
 #endif /* glfwWindow_hpp */
