@@ -12,7 +12,7 @@ GLuint program;
 GLuint vertexbuffer;
 
 void init_triangle(){
-    // Dark blue background
+    // Black background
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     
     GLuint VertexArrayID;

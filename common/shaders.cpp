@@ -87,4 +87,6 @@ GLuint LoadShaders(ShaderInfo* shaders){
         glDeleteShader(entry->shaderID);
         entry->shaderID = 0;
     }
+    
+    return programID;
 }
