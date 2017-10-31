@@ -1,6 +1,9 @@
 #ifndef glComp_h
 #define glComp_h
 
+/* This header file is including OpenGL headers for different base system
+ */
+
 #ifdef __APPLE__
     #include "TargetConditionals.h"
     #ifdef TARGET_OS_MAC
