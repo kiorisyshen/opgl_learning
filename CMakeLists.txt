@@ -17,6 +17,12 @@ endif()
 # Compile external dependencies 
 add_subdirectory (ThirdParty)
 
+# On Visual 2005 and above, this module can set the debug working directory
+cmake_policy(SET CMP0026 OLD)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/ThirdParty/rpavlik-cmake-modules")
+include(CreateLaunchers)
+include(MSVCMultipleProcessCompile) # /MP
+
 include_directories(
 	ThirdParty/glfw/include/GLFW/
 	ThirdParty/glm/
@@ -28,6 +34,14 @@ set(ALL_LIBS
 	${OPENGL_LIBRARY}
 	glfw
 	glew
+)
+
+add_definitions(
+	-DTW_STATIC
+	-DTW_NO_LIB_PRAGMA
+	-DTW_NO_DIRECT3D
+	-DGLEW_STATIC
+	-D_CRT_SECURE_NO_WARNINGS
 )
 
 # GL_learn 1
@@ -46,6 +60,7 @@ target_link_libraries(01_first_window
 )
 # Xcode working directories
 set_target_properties(01_first_window PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/01_first_window/")
+create_target_launcher(01_first_window WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/01_first_window/")
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*/.*shader$" )
